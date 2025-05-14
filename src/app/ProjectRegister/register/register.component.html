@@ -1,0 +1,165 @@
+
+    <app-topnav></app-topnav>
+
+  
+  <main id="main" class="main">
+  
+      <div class="pagetitle">
+        <h1>Register</h1>
+        
+      </div><!-- End Page Title -->
+  <section class="section">
+      
+      <div class="row">
+            <div class="card">
+              <div class="card-body">
+            <div class="col-lg-6">
+                  <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Select Project</label>
+                 
+                  <select class="form-select" id="project" name="project" [(ngModel)]="projectcode">
+                      <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
+
+                  </select>      
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-success btn-lg mt-4"(click)="GetEmployeeList()">Search  
+                  </button>
+        
+            </div>
+          </div>
+            </div>
+      </div>
+  
+      <div class="row">
+    
+       <div class="col-lg-12">
+  
+        
+          <div class="card">
+            <div class="card-body">
+            
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover table-bordered ">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Emp No</th>
+                    <th>Emirates ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Project</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let e of Employees;let i=index" >
+                        <td>{{i+1}}</td>
+                          <td>{{e.empCode}}</td>
+                          <td>{{e.eid}}</td> 
+                          <td>{{e.empName}}</td>
+                          <td>{{e.jobTitle}}</td>
+                          <td>{{e.projectName}}</td>
+                          <td>&nbsp;</td>
+                           <td>
+                            <button type="button" class="btn btn-success" (click)="openModelAssignedTraining(e.id,Assigntask)">Assign Training</button>
+                            <button type="button" class="btn btn-primary  ms-3" [routerLink]="['/opentrainings',e.id]">Editing</button>
+                            <button type="button" class="btn btn-warning  ms-3" (click)="openModelTransfer(e.id,Transfer)">Transfer</button>
+                            <button type="button" class="btn btn-danger  ms-3" (click)="openModelHistory(e.id,emphistory)">History</button>
+                          
+                          </td> 
+                        
+                      </tr>
+                </tbody>
+              </table>
+              <!-- End Table with hoverable rows -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <ng-template  #emphistory >
+  
+        <div class="modal-header">
+           <h4 class="modal-title">Training History</h4>
+           <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+           </button>
+          
+        </div>
+        <div class="modal-body">
+            <app-emp-history [EmpID]=EmpID></app-emp-history>
+        </div>
+
+        
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+       <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
+      </div>
+
+      
+    
+      </ng-template>
+      
+
+      <ng-template  #Assigntask >
+  
+        <div class="modal-header">
+           <h4 class="modal-title">Assign Training</h4>
+           <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+           </button>
+          
+        </div>
+        <div class="modal-body">
+            <app-assign-training></app-assign-training>
+        </div>
+  
+
+        
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+       <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
+      </div>
+
+      
+    
+      </ng-template>
+      
+ <ng-template  #Transfer >
+  
+        <div class="modal-header">
+           <h4 class="modal-title">Transfer Out</h4>
+           <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+           </button>
+          
+        </div>
+        <div class="modal-body">
+            <app-transfer-out></app-transfer-out>
+        </div>
+  
+
+        
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+       <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
+      </div>
+
+      
+    
+      </ng-template>
+      
+       
+      
+    
+  </main><!-- End #main -->
+  
+  
+  
+  
+  
+  
+  
+  

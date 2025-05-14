@@ -1,0 +1,57 @@
+  
+    <app-topnav></app-topnav>
+
+  
+  <main id="main" class="main">
+  
+    
+    <div class="pagetitle">
+      <h1>Open Trainings -{{EmpName}} - {{jobTitle}}</h1>
+    </div><!-- End Page Title -->
+
+  <section class="section">
+    
+    <div class="row">
+  
+     <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+           
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover table-bordered" id="table-data">
+              <thead>
+                <tr>
+                  <th>S.No</th>  
+                  <th>Project Code</th>
+                  <th>Project </th>
+                  <th>Training</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr *ngFor="let e of Data;let i=index" >
+                  <td>{{i+1}}</td>
+                  <td>{{e.projectCode}}</td>
+                  <td>{{e.projectName}}</td>
+                  <td>{{e.training}}</td>
+                  <td><a (click)="loadChild(e.training)"><i class="bi bi-door-closed-fill"></i></a></td>               
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+           
+           <app-close-training (notify)="getEmployeeHistory($event)" [EmpID]=EmpID  *ngIf="showChild" #childRef></app-close-training>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+

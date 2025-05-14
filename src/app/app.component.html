@@ -1,0 +1,33 @@
+<ngx-ui-loader fgsType="square-loader"></ngx-ui-loader>
+<router-outlet></router-outlet>
+
+<button type="button" class="btn btn-primary btn-sm" (click)="openModel(template)">Mark as CBank</button> 
+
+<ng-template #template>
+  <div class="modal-header">
+     <h4 class="modal-title">My APP</h4>
+     <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+     
+    
+     </button>
+    
+  </div>
+  <div class="modal-body">
+   <label for="inputMessage">-Template-Name</label>
+   <input type="text"> <br>
+
+   <label for="inputMessage">Address</label>
+   <input type="text">
+
+
+</div>
+
+<!-- Modal footer -->
+<div class="modal-footer">
+  
+ <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
+</div>
+
+</ng-template>
+
+

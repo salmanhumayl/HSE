@@ -1,0 +1,22 @@
+<p>Close-Training!{{TrainingName}}</p>
+
+ <form class="row">
+                  <div class="col-12">
+
+                                       
+                    <label for="inputNanme4" class="form-label">Completed On</label>
+                            <input type="text" class="form-control"
+                             id="receivedDate" 
+                            name="receivedDate"
+                             bsDatepicker
+                            [bsConfig]="datePickerConfig"/> 
+                     </div>
+                     <div class="col-12">
+                        <label for="inputNanme4" class="form-label">No of Hours Completed</label>
+                        <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
+                     </div>
+ </form>
+
+
+
+<button (click)="callParent()" class="btn btn-primary"> Save </button>
