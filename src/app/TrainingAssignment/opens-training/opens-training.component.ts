@@ -39,7 +39,7 @@ export class OpensTrainingComponent implements OnInit {
   getEmployeeHistory(Empid:number){
     
     this.ngxService.start();
-    alert("Caa" + Empid);
+    
     this.AJESservice.GetEmployeeOpenTrainings(Empid).subscribe((response)=>  {
     
       if(response.length > 0){

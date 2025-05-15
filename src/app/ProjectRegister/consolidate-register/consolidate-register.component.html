@@ -10,7 +10,23 @@
       </div><!-- End Page Title -->
   <section class="section">
       
-     
+     <div class="row">
+            <div class="card">
+              <div class="card-body">
+            <div class="col-lg-6">
+                  <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Select Project</label>
+                 
+                  <select class="form-select" id="project" name="project" [(ngModel)]="projectcode" (change)="GetEmployeeList()">
+                      <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
+
+                  </select>    
+                  <!-- <button type="button" class="btn btn-success right-btn mt-2"(click)="GetEmployeeList()">Search  
+                  </button>   -->
+            </div>
+            
+          </div>
+            </div>
+      </div>
   
       <div class="row">
     
@@ -44,10 +60,7 @@
                           <!-- <td>{{e.projectName}}</td> -->
                           <!-- <td>&nbsp;</td> -->
                            <td>
-                            <button type="button" class="btn btn-success btn-sm" (click)="openModelAssignedTraining(e.id,Assigntask)">Assign Training</button>
-                            <button type="button" class="btn btn-primary btn-sm  ms-3" [routerLink]="['/opentrainings',e.id]">Editing</button>
-                            <button type="button" class="btn btn-warning btn-sm  ms-3" (click)="openModelTransfer(e.id,Transfer)">Transfer</button>
-                            <button type="button" class="btn btn-danger btn-sm ms-3" (click)="openModelHistory(e.id,e.jobCode,emphistory)">History</button>
+                            <button type="button" class="btn btn-danger  btn-sm" (click)="openModelHistory(e.id,e.jobCode,emphistory)">History</button>
                           
                           </td> 
                         
@@ -70,7 +83,7 @@
           
         </div>
         <div class="modal-body">
-            <app-emp-history [EmpID]=EmpID [jobCode]=jobCode></app-emp-history>
+            <app-emp-history [EmpID]=EmpID [jobCode]=JobCode></app-emp-history>
         </div>
 
         
@@ -145,3 +158,4 @@
   
   
   
+

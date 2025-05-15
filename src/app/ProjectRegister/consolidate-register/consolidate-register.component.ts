@@ -4,21 +4,21 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { AJESService } from 'src/app/service/app.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-consolidate-register',
+  templateUrl: './consolidate-register.component.html',
+  styleUrls: ['./consolidate-register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class ConsolidateRegisterComponent  implements OnInit {
  bsModalRef?: BsModalRef;
   Projects:any[];
   Employees:any[];
-  projectcode:string="8069";
+  projectcode:string;
   EmpID:number;
-  jobCode:string;
+  JobCode:string;
   constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
     ngOnInit(): void {
         
-     this.GetEmployeeList();
+     this.GetProject();
     
     }
   
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     {
       
      this.EmpID=empid;
-     this.jobCode=jobCode;
+      this.JobCode=jobCode;
      this.bsModalRef=this.modalService.show(template,{
       class:'modal-xl',
        backdrop: 'static',
@@ -58,45 +58,7 @@ export class RegisterComponent implements OnInit {
     }
 
 
-public openModelAssignedTraining(empid:number,template :TemplateRef<any>)
-    {
-      
-     this.EmpID=empid;
-     
-     this.bsModalRef=this.modalService.show(template,{
-      class:'modal-xl',
-       backdrop: 'static',
-       keyboard: false,
-       ignoreBackdropClick: true 
-     });
-   
-    }
 
-public openModelOpenTraining(empid:number,template :TemplateRef<any>)
-    {
-      
-     this.EmpID=empid;
-     this.bsModalRef=this.modalService.show(template,{
-      class:'modal-xl',
-       backdrop: 'static',
-       keyboard: false,
-       ignoreBackdropClick: true 
-     });
-   
-    }
-
-    public openModelTransfer(empid:number,template :TemplateRef<any>)
-    {
-    
-     this.EmpID=empid;
-     this.bsModalRef=this.modalService.show(template,{
-      class:'modal-xl',
-       backdrop: 'static',
-       keyboard: false,
-       ignoreBackdropClick: true 
-     });
-   
-    }
 }
 
 // class:'modal-lg',

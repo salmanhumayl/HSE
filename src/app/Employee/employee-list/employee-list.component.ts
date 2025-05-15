@@ -21,7 +21,7 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
   
     GetEmployeeList(){
       this.ngxService.start();
-     this.AJESservice.GetEmployeeList("8000").subscribe((data)=>  {
+     this.AJESservice.GetEmployeeList("8069").subscribe((data)=>  {
       this.Employees=data;
       this.ngxService.stop();
      });

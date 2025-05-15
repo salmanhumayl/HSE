@@ -5,11 +5,12 @@ import { EmployeeDetailComponent } from './Employee/employee-detail/employee-det
 import { RegisterComponent } from './ProjectRegister/register/register.component';
 import { EmployeeListComponent } from './Employee/employee-list/employee-list.component';
 import { OpensTrainingComponent } from './TrainingAssignment/opens-training/opens-training.component';
+import { ConsolidateRegisterComponent } from './ProjectRegister/consolidate-register/consolidate-register.component';
 
 const routes: Routes = [
   {path:'',component:DashboardComponent,pathMatch:'full'},
   {path:'dashboard',component:DashboardComponent},
-  {path:'empDetail',component:EmployeeDetailComponent},
+  {path:'allprojects',component:ConsolidateRegisterComponent},
   {path:'register',component:RegisterComponent},
   {path:'employeelst',component:EmployeeListComponent},
   {path:'opentrainings/:empid',component:OpensTrainingComponent}

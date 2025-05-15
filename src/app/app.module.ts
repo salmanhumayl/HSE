@@ -20,13 +20,15 @@ import { EmployeeDetailComponent } from './Employee/employee-detail/employee-det
 import { RegisterComponent } from './ProjectRegister/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { EmployeeListComponent } from './Employee/employee-list/employee-list.component';
-import { ProjectregisterComponent } from './ProjectRegister/projectregister/projectregister.component';
+
 import { AssignTrainingComponent } from './TrainingAssignment/assign-training/assign-training.component';
 import { OpensTrainingComponent } from './TrainingAssignment/opens-training/opens-training.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { CloseTrainingComponent } from './TrainingAssignment/close-training/close-training.component';
 import { CustomDateControlComponent } from './FormControl/custom-date-control/custom-date-control.component';
 import { TransferOutComponent } from './Transfer/transfer-out/transfer-out.component';
+import { ConsolidateRegisterComponent } from './ProjectRegister/consolidate-register/consolidate-register.component';
+import { RemainingTraningsComponent } from './Employee/History/remaining-tranings/remaining-tranings.component';
 
 
 @NgModule({
@@ -40,12 +42,13 @@ import { TransferOutComponent } from './Transfer/transfer-out/transfer-out.compo
     EmployeeDetailComponent,
     RegisterComponent,
     EmployeeListComponent,
-    ProjectregisterComponent,
     AssignTrainingComponent,
     OpensTrainingComponent,
     CloseTrainingComponent,
     CustomDateControlComponent,
-    TransferOutComponent
+    TransferOutComponent,
+    ConsolidateRegisterComponent,
+    RemainingTraningsComponent
   ],
   imports: [
     FormsModule,

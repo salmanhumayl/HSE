@@ -33,6 +33,12 @@ export class AJESService {
     return this._http.get<any>(this.domain + "api/Employee/GetEmployeeOpenTrainings/" + employeeId  ); //Route Parameter 
     
   }
+  
+  GetRemainingTraining(JobCode:string,employeeId:number):Observable<any>{
+
+    return this._http.get<any>(this.domain + "api/Employee/GetRemainingTraining/" + JobCode + "/" + employeeId ); //Route Parameter 
+    
+  }
 
   
 

@@ -20,6 +20,8 @@
                   <th>Training</th>
                   <th>Completed On</th>
                   <th>Hours</th>
+                  <th>Status</th>
+                  
                 </tr>
               </thead>
               <tbody >
@@ -32,8 +34,20 @@
                       <td>{{e.completedOn | date:'dd'}}/{{e.completedOn | date:'MM'}}/{{e.completedOn | date:'yyyy'}}</td>
                   </ng-template>    
                   
-                  <td>{{e.hourHoursCompleted}}</td>
-               
+                   <ng-template [ngIf]="e.completedOn==null">
+                      <td>&nbsp;</td>
+                   </ng-template>
+               <ng-template [ngIf]="e.status=='C'">
+                     <td>{{e.hourHoursCompleted}}</td>
+                      <td ><span class="badge rounded-pill bg-success" style="pointer-events: none">Completed</span></td>
+                     
+                  </ng-template>    
+                  <ng-template [ngIf]="e.status=='A'" >
+                      <td>&nbsp;</td>
+                      <td><span class="badge rounded-pill bg-primary" style="pointer-events: none">Progress</span></td>
+                     
+                  </ng-template>   
+                  
 
                 
                 </tr>
@@ -44,5 +58,9 @@
         </div>
       </div>
     </div>
+
+<app-remaining-tranings [EmpID]="EmpID" [jobCode]="jobCode"></app-remaining-tranings>
+
+
   </section>
 
