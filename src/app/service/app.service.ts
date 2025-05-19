@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { TrainingMatrix } from '../models/TrainingMatrix ';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-    //this.domain="http://ajes-webapp2.ajes.ae:4223/";
+  //  this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
    this.domain="https://localhost:7047/";
    }
@@ -40,12 +41,41 @@ export class AJESService {
     
   }
 
-  
-
   GetProject():Observable<any>{
 
-    return this._http.get<any>(this.domain + "api/Project/GetProject" ); //Route Parameter 
+    return this._http.get<any>(this.domain + "api/Project/GetProject" );  
+    
+  }
+
+  GetTraining():Observable<any[]>{
+
+    return this._http.get<any[]>(this.domain + "api/Training/GetTraining" );  
     
   }
   
+   GetJobCategory():Observable<any>{
+
+    return this._http.get<any>(this.domain + "api/Designation/GetJobCategory" );  
+    
+  }
+  
+   GetPositions(categorycode:string):Observable<any>{
+
+    return this._http.get<any>(this.domain + "api/Designation/GetPositions/" + categorycode );  
+    
+  }
+  GetTrainingMatrix():Observable<TrainingMatrix[]>{
+
+    return this._http.get<TrainingMatrix[]>(this.domain + "api/Training/GetTrainingMatrix");  
+    
+  }
+
+   GetTrainingsByType(type:string):Observable<any[]>{
+
+    return this._http.get<any[]>(this.domain + "api/Training/GetTrainingsByType/" + type );  
+    
+  }
+
+  
+
 }

@@ -29,6 +29,8 @@ import { CustomDateControlComponent } from './FormControl/custom-date-control/cu
 import { TransferOutComponent } from './Transfer/transfer-out/transfer-out.component';
 import { ConsolidateRegisterComponent } from './ProjectRegister/consolidate-register/consolidate-register.component';
 import { RemainingTraningsComponent } from './Employee/History/remaining-tranings/remaining-tranings.component';
+import { TrainingComponent } from './Setup/training/training.component';
+import { MatrixComponent } from './Setup/matrix/matrix.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { RemainingTraningsComponent } from './Employee/History/remaining-traning
     CustomDateControlComponent,
     TransferOutComponent,
     ConsolidateRegisterComponent,
-    RemainingTraningsComponent
+    RemainingTraningsComponent,
+    TrainingComponent,
+    MatrixComponent
   ],
   imports: [
     FormsModule,

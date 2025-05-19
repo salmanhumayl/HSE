@@ -82,9 +82,14 @@
 
                   <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emp No</label>
-                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
                   </div>
-                  <div class="col-12">
+                   <div class="col-6"> 
+                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
+                   </div>
+                   <div class="col-6">
+                    <button class="btn btn-success">Get Employee</button>
+                   </div>
+                    <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
                     <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
                   </div>
@@ -92,18 +97,35 @@
                     <label for="inputEmail4" class="form-label">Emp Name</label>
                     <input type="text" class="form-control" id="EmpName"  name="EmpName"  >
                   </div>
+
+                   <div class="col-12">
+                    <label for="inputAddress" class="form-label">Job Category</label>
+                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="JobCategory" (change)="GetPostions()" >
+                      <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
+
+                  </select>    
+                  </div>
                   
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Position</label>
-                    <input type="text" class="form-control" id="position"  name="position" >
+                   <select class="form-select" id="postions" name="postions" >
+                      <option *ngFor="let s of Postions" [value]="s.code">{{s.name}}</option>
+
+                  </select>    
                   </div>
                   <div class="col-12">
                     <label for="inputPassword4" class="form-label">Project</label>
-                    <input type="text" class="form-control" id="passportNo"  name="passportNo" >
+                    
+                  <select class="form-select" id="project" name="project" >
+                      <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
+
+                  </select>    
                   </div>
-                  <div class="text-center">
-                
-                  </div>
+                   <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="refresh()">Submit</button>
+                     <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
+              </div>
+  
                 </form>
   
               </div>
@@ -119,12 +141,7 @@
   </div>
   
   <!-- Modal footer -->
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Submit</button>
-   <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
  
-  </div>
-  
   </ng-template>
 
 

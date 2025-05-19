@@ -9,12 +9,17 @@ import { AJESService } from 'src/app/service/app.service';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
- bsModalRef?: BsModalRef;
-  Employees:any[];
+bsModalRef?: BsModalRef;
+Employees:any[];
+Projects:any[];
+Category:any[];
+Postions:any[];
+JobCategory:string;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
     ngOnInit(): void {
-        
+      this.GetProject();
+      this.GetJobCategory();
       this.GetEmployeeList();
     
     }
@@ -26,6 +31,32 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
       this.ngxService.stop();
      });
    }
+
+    GetProject(){
+      this.ngxService.start();
+     this.AJESservice.GetProject().subscribe((data)=>  {
+      this.Projects=data;
+      this.ngxService.stop();
+     });
+   }
+
+     GetJobCategory(){
+      this.ngxService.start();
+     this.AJESservice.GetJobCategory().subscribe((data)=>  {
+      this.Category=data;
+      this.ngxService.stop();
+     });
+   }
+
+
+     GetPostions(){
+      this.ngxService.start();
+     this.AJESservice.GetPositions(this.JobCategory).subscribe((data)=>  {
+      this.Postions=data;
+      this.ngxService.stop();
+     });
+   }
+
 
     public openModel(template :TemplateRef<any>)
        {
@@ -42,6 +73,10 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
    
        closeModal() {
          this.bsModalRef?.hide() ;
+       }
+
+       refresh(){
+        this.GetEmployeeList();
        }
 
 }
