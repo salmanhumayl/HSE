@@ -84,23 +84,23 @@
                     <label for="inputNanme4" class="form-label">Emp No</label>
                   </div>
                    <div class="col-6"> 
-                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
+                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode" [(ngModel)]="EmpCode"  >
                    </div>
                    <div class="col-6">
-                    <button class="btn btn-success">Get Employee</button>
+                    <button class="btn btn-success" (click)="GetAJESEmployee()" >Get Employee</button>
                    </div>
                     <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
-                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
+                    <input type="text" class="form-control" id="EID"  name="EID" [(ngModel)]="EmployeeModel.eid" >
                   </div>
                   <div class="col-12"> 
                     <label for="inputEmail4" class="form-label">Emp Name</label>
-                    <input type="text" class="form-control" id="EmpName"  name="EmpName"  >
+                    <input type="text" class="form-control" id="EmpName"  name="EmpName" [(ngModel)]="EmployeeModel.empName" >
                   </div>
 
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="JobCategory" (change)="GetPostions()" >
+                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" >
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
 
                   </select>    
@@ -108,7 +108,7 @@
                   
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Position</label>
-                   <select class="form-select" id="postions" name="postions" >
+                   <select class="form-select" id="postions" name="postions"  [(ngModel)]="EmployeeModel.jobCode">
                       <option *ngFor="let s of Postions" [value]="s.code">{{s.name}}</option>
 
                   </select>    
@@ -116,7 +116,7 @@
                   <div class="col-12">
                     <label for="inputPassword4" class="form-label">Project</label>
                     
-                  <select class="form-select" id="project" name="project" >
+                  <select class="form-select" id="project" name="project" [(ngModel)]="EmployeeModel.projectCode" >
                       <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
 
                   </select>    

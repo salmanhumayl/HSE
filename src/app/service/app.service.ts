@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { TrainingMatrix } from '../models/TrainingMatrix ';
+import { SearchEmp } from '../models/searchEmp';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-  //  this.domain="http://ajes-webapp2.ajes.ae:4225/";
+   // this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
-   this.domain="https://localhost:7047/";
+  this.domain="https://localhost:7047/";
    }
 
   GetEmployeeHistory(employeeId:number):Observable<any>{
@@ -76,6 +77,12 @@ export class AJESService {
     
   }
 
+  
+GetAJESEmployee(empcode:string):Observable<SearchEmp>{
+
+    return this._http.get<SearchEmp>(this.domain + "api/Employee/GetAJESEmployee/" + empcode );  
+    
+  }
   
 
 }

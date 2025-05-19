@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Employee } from 'src/app/models/Employee';
+import { SearchEmp } from 'src/app/models/searchEmp';
 import { AJESService } from 'src/app/service/app.service';
 
 @Component({
@@ -15,11 +17,15 @@ Projects:any[];
 Category:any[];
 Postions:any[];
 JobCategory:string;
+
+EmpView:SearchEmp=new SearchEmp();
+EmployeeModel:Employee =new Employee();
+EmpCode:string;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
     ngOnInit(): void {
-      this.GetProject();
       this.GetJobCategory();
+      this.GetProject();
       this.GetEmployeeList();
     
     }
@@ -51,11 +57,26 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
      GetPostions(){
       this.ngxService.start();
-     this.AJESservice.GetPositions(this.JobCategory).subscribe((data)=>  {
+      this.AJESservice.GetPositions(this.EmpView.familyCode).subscribe((data)=>  {
       this.Postions=data;
       this.ngxService.stop();
      });
    }
+
+   GetAJESEmployee(){
+   
+    this.ngxService.start();
+    this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe((data)=>  {
+    this.EmpView=data;
+    this.EmployeeModel.empName=this.EmpView.empName;
+    this.EmployeeModel.projectCode=this.EmpView.projectCode;
+    this.EmployeeModel.jobCode=this.EmpView.designationCode;
+    this.GetPostions()
+   
+   this.ngxService.stop();
+  });
+}
+
 
 
     public openModel(template :TemplateRef<any>)
