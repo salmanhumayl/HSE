@@ -36,6 +36,7 @@
                 <thead>
                   <tr>
                     <th>S.No</th>
+                    <th>Job Category</th>
                     <th>Job Title</th>
                     <th>Training</th>
                     <th>Mandatory</th>
@@ -45,9 +46,10 @@
                 <tbody>
                     <tr *ngFor="let item of trainingData;let i=index" >
                         <td>{{i+1}}</td>
-                          <td>{{item.jobTitle}}</td>
-                          <td>{{item.training.name}}</td> 
-                          <td>{{ item.isMandatory ? 'Yes' : 'No' }}</td>
+                        <td>{{item.familyName}}</td>
+                        <td>{{item.jobTitle}}</td>
+                        <td>{{item.training.name}}</td> 
+                        <td>{{ item.isMandatory ? 'Yes' : 'No' }}</td>
                          
                         <ng-template [ngIf]="item.training.type=='I'">
                              <td ><span class="badge rounded-pill bg-primary" style="pointer-events: none">Internal </span></td>
@@ -112,7 +114,7 @@
 
 
                 <div class="col-12">
-                  <label for="inputNanme4" class="form-label">Training Type</label>
+                  <label for="inputNanme4" class="form-label">Trainings</label>
                      <select class="form-select" id="trianins" name="trianins">
                          <option *ngFor="let s of trainings" [value]="s.id">{{s.name}}</option>
                      </select>

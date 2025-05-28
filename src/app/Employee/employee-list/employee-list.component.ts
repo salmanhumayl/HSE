@@ -16,23 +16,25 @@ Employees:any[];
 Projects:any[];
 Category:any[];
 Postions:any[];
-JobCategory:string;
+familyCode:string;
 
 EmpView:SearchEmp=new SearchEmp();
 EmployeeModel:Employee =new Employee();
 EmpCode:string;
+isSearchDiabled:boolean;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
     ngOnInit(): void {
       this.GetJobCategory();
       this.GetProject();
       this.GetEmployeeList();
-    
+      this.isSearchDiabled=true;
     }
   
     GetEmployeeList(){
+      
       this.ngxService.start();
-     this.AJESservice.GetEmployeeList("8069").subscribe((data)=>  {
+      this.AJESservice.GetEmployeeList("8069").subscribe((data)=>  {
       this.Employees=data;
       this.ngxService.stop();
      });
@@ -48,7 +50,7 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
      GetJobCategory(){
       this.ngxService.start();
-     this.AJESservice.GetJobCategory().subscribe((data)=>  {
+      this.AJESservice.GetJobCategory().subscribe((data)=>  {
       this.Category=data;
       this.ngxService.stop();
      });
@@ -68,9 +70,16 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
     this.ngxService.start();
     this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe((data)=>  {
     this.EmpView=data;
+    this.EmployeeModel.empCode=this.EmpView.empCode
     this.EmployeeModel.empName=this.EmpView.empName;
     this.EmployeeModel.projectCode=this.EmpView.projectCode;
+    this.EmployeeModel.projectName=this.EmpView.projectName
+    
+    this.EmployeeModel.familyCode=this.EmpView.familyCode;
+    this.EmployeeModel.familyName=this.EmpView.familyName;
     this.EmployeeModel.jobCode=this.EmpView.designationCode;
+   
+    this.EmployeeModel.jobTitle=this.EmpView.jobtitle;
     this.GetPostions()
    
    this.ngxService.stop();
@@ -96,8 +105,25 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
          this.bsModalRef?.hide() ;
        }
 
-       refresh(){
-        this.GetEmployeeList();
+      
+
+       getEmpType(){
+        this.isSearchDiabled=true;
+        if (this.EmployeeModel.empType=="A"){
+            this.isSearchDiabled=false
+        }
+      }
+
+       SaveEmployee()
+       {
+        this.AJESservice.AddEmployee(this.EmployeeModel).subscribe((response)=>{
+//this.EmployeeModel =new Employee();
+          this.GetEmployeeList(); 
+
+        });
+      
        }
 
-}
+      }
+
+

@@ -69,16 +69,15 @@
                 
   
                 <!-- Vertical Form -->
-                 <form class="row">
+                 <form  class="row">
                    <div class="col-12">
                     <label for="inputNanme4" class="form-label">Select Employee Type</label>
-                    <select class="form-select">
+                    <select class="form-select" (change)="getEmpType()"  name="emptype" [(ngModel)]="EmployeeModel.empType">
                        <option value=X selected >Please Select</option>
-                        <option value=E>AJES</option>   
+                        <option value=A>AJES</option>   
                         <option value=S>Sub Contactor</option>    
                     </select>
                   </div>  
-
 
                   <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emp No</label>
@@ -87,7 +86,7 @@
                     <input type="text" class="form-control" id="EmpCode"  name="EmpCode" [(ngModel)]="EmpCode"  >
                    </div>
                    <div class="col-6">
-                    <button class="btn btn-success" (click)="GetAJESEmployee()" >Get Employee</button>
+                    <button class="btn btn-success" (click)="GetAJESEmployee()" [disabled]="isSearchDiabled" >Get Employee</button>
                    </div>
                     <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
@@ -100,7 +99,7 @@
 
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" >
+                   <select class="form-select" id="familyCode" name="familyCode"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" >
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
 
                   </select>    
@@ -122,7 +121,7 @@
                   </select>    
                   </div>
                    <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="refresh()">Submit</button>
+                     <button type="button" class="btn btn-primary" (click)="SaveEmployee()">Submit</button>
                      <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
               </div>
   
