@@ -4,6 +4,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { TrainingMatrix } from '../models/TrainingMatrix ';
 import { SearchEmp } from '../models/searchEmp';
 import { Employee } from '../models/Employee';
+import { Matrix } from '../models/Matrix';
+import { EmployeeTraining } from '../models/EmployeeTraining';
 
 @Injectable({
   providedIn: 'root'
@@ -72,13 +74,21 @@ export class AJESService {
     
   }
 
-   GetTrainingsByType(type:string):Observable<any[]>{
+  //  GetTrainingsByType(type:string):Observable<any[]>{
 
-    return this._http.get<any[]>(this.domain + "api/Training/GetTrainingsByType/" + type );  
+  //   return this._http.get<any[]>(this.domain + "api/Training/GetTrainingsByType/" + type );  
+    
+  // }
+
+  
+    GetEmployeeTrainingByType(jobcode:string,empid:number,trainingtype:string):Observable<any[]>{
+
+     return this._http.get<any[]>(this.domain + "api/Employee/GetEmployeeTrainingByType/" + jobcode + "/"  + empid + "/" + trainingtype);  
     
   }
 
-  
+
+
 GetAJESEmployee(empcode:string):Observable<SearchEmp>{
 
     return this._http.get<SearchEmp>(this.domain + "api/Employee/GetAJESEmployee/" + empcode );  
@@ -88,6 +98,14 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
  AddEmployee(empmodel:Employee){
   return this._http.post<string>(this.domain + "api/Employee/AddEmployee",empmodel )
  } 
+  AddTrainingMatrix(matrixmodel:Matrix){
+  return this._http.post<string>(this.domain + "api/Training/AddTrainingMatrix",matrixmodel )
+ } 
+  AssignedTraining(trainingmodel:EmployeeTraining[]){
+   
+  return this._http.post<string>(this.domain + "api/Employee/AddEmployeeTraining",trainingmodel )
+ } 
   
+ 
 
 }

@@ -91,19 +91,19 @@
                  <form class="row">
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="JobCategory" (change)="GetPostions()" >
+                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="matrixModel.FamilyCode" (change)="GetPostions()" >
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
                    </select>    
                    </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Position</label>
-                   <select class="form-select" id="postions" name="postions" >
+                   <select class="form-select" id="postions" name="postions" [(ngModel)]="matrixModel.JobCode" >
                       <option *ngFor="let s of Postions" [value]="s.code">{{s.name}}</option>
                   </select>    
                   </div>
                   <div class="col-12">
                     <label for="inputNanme4" class="form-label">Training Type</label>
-                    <select class="form-select" id="trianinType" name="trianinType" [(ngModel)]="trianinType" (change)="GetTrainingsByType()">
+                    <select class="form-select" id="trianinType" name="trianinType" [(ngModel)]="matrixModel.trainingType" >
                        <option value=X selected >Please Select</option>
                         <option value=I>Internal</option>   
                         <option value=E>External</option>    
@@ -112,24 +112,25 @@
                   
                   
 
-
+<!-- 
                 <div class="col-12">
                   <label for="inputNanme4" class="form-label">Trainings</label>
                      <select class="form-select" id="trianins" name="trianins">
                          <option *ngFor="let s of trainings" [value]="s.id">{{s.name}}</option>
                      </select>
-                </div>
-                <div class="col-6">
+                </div> -->
+
+                <!-- <div class="col-6">
                     <label for="inputNanme4" class="form-label">Mandatory</label>
                     <select class="form-select">
                        <option value=X selected >Please Select</option>
                         <option value=Y>Yes</option>   
                         <option value=N>No</option>    
                     </select>
-                  </div>
+                  </div> -->
                 
                    <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" >Submit</button>
+                   <button type="button" class="btn btn-primary" (click)="Save()">Submit</button>
                      <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
                   </div>
   

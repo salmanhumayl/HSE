@@ -1,8 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Matrix } from 'src/app/models/Matrix';
 import { TrainingMatrix } from 'src/app/models/TrainingMatrix ';
 import { AJESService } from 'src/app/service/app.service';
+
+//declare const $:any;
 
 @Component({
   selector: 'app-matrix',
@@ -12,6 +15,8 @@ import { AJESService } from 'src/app/service/app.service';
 export class MatrixComponent implements OnInit {
  bsModalRef?: BsModalRef;
    trainingData: TrainingMatrix[] = [];
+   matrixModel:Matrix=new Matrix();
+
    trainings:any[]=[];
    Category:any[];
    Postions:any[];
@@ -46,20 +51,14 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
      GetPostions(){
       this.ngxService.start();
-     this.AJESservice.GetPositions(this.JobCategory).subscribe((data)=>  {
+     this.AJESservice.GetPositions(this.matrixModel.FamilyCode).subscribe((data)=>  {
       this.Postions=data;
       this.ngxService.stop();
      });
    }
 
    
-    GetTrainingsByType(){
-      this.ngxService.start();
-     this.AJESservice.GetTrainingsByType(this.trianinType).subscribe((data)=>  {
-      this.trainings=data;
-      this.ngxService.stop();
-     });
-   }
+  
 
     public openModel(template :TemplateRef<any>)
           {
@@ -67,17 +66,40 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
            
            this.bsModalRef=this.modalService.show(template,{
 
-              class:'modal-lg',
+             class:'modal-lg',
              backdrop: 'static',
              keyboard: false,
              ignoreBackdropClick: true 
            });
          
           }
-      
           closeModal() {
             this.bsModalRef?.hide() ;
+            this.bsModalRef=undefined;
           }
 
+           Save()
+       {
+       
+            var JobCategory=document.getElementById('JobCategory') as HTMLSelectElement;
+            this.matrixModel.FamilyName=JobCategory.options[JobCategory.selectedIndex].text;
+            
+            var postions=document.getElementById('postions') as HTMLSelectElement;
+            this.matrixModel.JobTitle=postions.options[postions.selectedIndex].text;
+            
+            
+            this.AJESservice.AddTrainingMatrix(this.matrixModel).subscribe((response)=>{
+            this.getTrainingMatrix();
+            this.matrixModel.FamilyCode='';
+            this.matrixModel.JobCode='';
+            this.matrixModel.trainingType='';
+         //   this.matrixModel=new Matrix();
+            }); 
+       
+        }
+      
+       
+
+          
 
 }

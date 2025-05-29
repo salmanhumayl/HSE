@@ -1,10 +1,10 @@
 <form class="row">
                    <div class="col-12">
                     <label for="inputNanme4" class="form-label">Training Type</label>
-                    <select class="form-select">
+                    <select class="form-select" name="trainingtype" [(ngModel)]="Ttype" (change)="filtertraining()">
                        <option value=X selected >Please Select</option>
-                        <option value=E>Internal</option>   
-                        <option value=S>External</option>    
+                        <option value=I>Internal</option>   
+                        <option value=E>External</option>    
                     </select>
                   </div>  
 </form>
@@ -12,70 +12,28 @@
 
 <div class="row">
 
-         <div class="col-lg-12" >
-                <div class="row" >
+   <div class="col-lg-12" >
+       <div class="row" >
+
 
             <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-4" >
+            <div class="col-xxl-4 col-md-4" *ngFor="let e of Data;let i=index">
  
                     <div class="card">
                                 <div class="card-body">
-                                <h5 class="card-title">AJES Site HSE Induction</h5>
+                                <h5 class="card-title">{{e.name}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Mandatory</h6>
-                                <p class="card-text"><a class="btn btn-primary" (click)="hello()">Assign</a></p>
+                                <!-- <p class="card-text" ><a #linkRef class="btn btn-primary" (click)="text(linkRef,e.matrixId)">Assign</a></p> -->
+                                <p class="card-text" ><a  class="btn btn-primary" (click)="Assigned($event,e.matrixId)">Assign</a></p>
                                 
                                 </div>
                             </div><!-- End Card with titles, buttons, and links -->
 
             </div>
-            <div class="col-xxl-4 col-md-4" >
-   
-                <div class="card">
-                            <div class="card-body">
-                            <h5 class="card-title">Visitors Induction</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Mandatory</h6>
-                            <p class="card-text"><a href="#" class="btn btn-primary">Assign</a></p>
-                            
-                            </div>
-                        </div><!-- End Card with titles, buttons, and links -->
-                 
-            </div>                
-           
-            <div class="col-xxl-4 col-md-4" >
- 
-                <div class="card">
-                            <div class="card-body">
-                            <h5 class="card-title">Client HSE Induction</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Mandatory</h6>
-                            <p class="card-text"><a href="#" class="btn btn-primary">Assign</a></p>
-                            
-                            </div>
-                        </div><!-- End Card with titles, buttons, and links -->     
-            </div>
-
-            <div class="col-xxl-4 col-md-4" >
- 
-                <div class="card">
-                            <div class="card-body">
-                            <h5 class="card-title">Drivers Basic Induction</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Optional</h6>
-                            <p class="card-text"><a href="#" class="btn btn-primary">Assign</a></p>
-                            
-                            </div>
-                        </div><!-- End Card with titles, buttons, and links -->     
-            </div>
-
-            <div class="col-xxl-4 col-md-4" >
- 
-                <div class="card">
-                            <div class="card-body">
-                            <h5 class="card-title">Env. Induction</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Mandatory</h6>
-                            <p class="card-text"><a href="#" class="btn btn-primary">Assign</a></p>
-                            
-                            </div>
-                        </div><!-- End Card with titles, buttons, and links -->     
-            </div>
+             <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" (click)="AssignedTraining()">Submit</button>
+                     
+              </div>
             </div>
     </div>
     

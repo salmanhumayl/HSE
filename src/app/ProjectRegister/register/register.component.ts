@@ -44,6 +44,7 @@ export class RegisterComponent implements OnInit {
       
      this.EmpID=empid;
      this.jobCode=jobCode;
+     
      this.bsModalRef=this.modalService.show(template,{
       class:'modal-xl',
        backdrop: 'static',
@@ -58,11 +59,11 @@ export class RegisterComponent implements OnInit {
     }
 
 
-public openModelAssignedTraining(empid:number,template :TemplateRef<any>)
+public openModelAssignedTraining(empid:number,jobCode:string,template :TemplateRef<any>)
     {
       
      this.EmpID=empid;
-     
+     this.jobCode=jobCode;
      this.bsModalRef=this.modalService.show(template,{
       class:'modal-xl',
        backdrop: 'static',

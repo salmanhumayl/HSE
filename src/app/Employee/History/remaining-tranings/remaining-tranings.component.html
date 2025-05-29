@@ -15,14 +15,19 @@
                 <tr>
                   <th>S.No</th>  
                   <th>Training</th>
-                  <th>Status</th>
+                  <th>Type</th>
                 </tr>
               </thead>
               <tbody >
                 <tr *ngFor="let e of Data;let i=index" >
                   <td>{{i+1}}</td>
                   <td>{{e.name}}</td>
-                  <td>{{e.name}}</td>
+                  <ng-template [ngIf]="e.type=='I'">
+                             <td ><span class="badge rounded-pill bg-primary" style="pointer-events: none">Internal </span></td>
+                        </ng-template>
+                             <ng-template [ngIf]="e.type=='E'">
+                             <td ><span class="badge rounded-pill bg-info" style="pointer-events: none">External </span></td>
+                        </ng-template>  
                 </tr>
               </tbody>
             </table>
