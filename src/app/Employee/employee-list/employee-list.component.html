@@ -69,11 +69,11 @@
                 
   
                 <!-- Vertical Form -->
-                 <form  class="row">
+                 <form  class="row" #itemForm="ngForm" novalidate (ngSubmit)="SaveEmployee(itemForm)">
                    <div class="col-12">
                     <label for="inputNanme4" class="form-label">Select Employee Type</label>
-                    <select class="form-select" (change)="getEmpType()"  name="emptype" [(ngModel)]="EmployeeModel.empType">
-                       <option value=X selected >Please Select</option>
+                    <select class="form-select" (change)="getEmpType()"  name="emptype" id="emptype" [(ngModel)]="EmployeeModel.empType">
+                       <option  value=X selected >Please Select</option>
                         <option value=A>AJES</option>   
                         <option value=S>Sub Contactor</option>    
                     </select>
@@ -83,10 +83,10 @@
                     <label for="inputNanme4" class="form-label">Emp No</label>
                   </div>
                    <div class="col-6"> 
-                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode" [(ngModel)]="EmpCode"  >
+                    <input type="text" class="form-control" id="EmpCode"  name="EmpCode" [disabled]="IsEmpCodeTextDisabled" [(ngModel)]="EmpCode"  >
                    </div>
                    <div class="col-6">
-                    <button class="btn btn-success" (click)="GetAJESEmployee()" [disabled]="isSearchDiabled" >Get Employee</button>
+                    <button class="btn btn-success" (click)="GetAJESEmployee()" [disabled]="IsSearchButtonDisabled" >Get Employee</button>
                    </div>
                     <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
@@ -94,7 +94,13 @@
                   </div>
                   <div class="col-12"> 
                     <label for="inputEmail4" class="form-label">Emp Name</label>
-                    <input type="text" class="form-control" id="EmpName"  name="EmpName" [(ngModel)]="EmployeeModel.empName" >
+                    <input type="text" class="form-control" id="EmpName" required  name="EmpName" #name="ngModel"  [(ngModel)]="EmployeeModel.empName" >
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)"  class="alert alert-danger">
+                      <diV *ngIf="name.errors?.['required']">
+                        Employeee Name is required.
+                      </diV>
+
+                    </div>
                   </div>
 
                    <div class="col-12">
@@ -121,9 +127,9 @@
                   </select>    
                   </div>
                    <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="SaveEmployee()">Submit</button>
+                     <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Submit</button>
                      <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
-              </div>
+                   </div>
   
                 </form>
   

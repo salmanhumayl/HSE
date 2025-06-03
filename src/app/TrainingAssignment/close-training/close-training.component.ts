@@ -8,6 +8,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class CloseTrainingComponent {
   TrainingName:string;
+  EmployeeTrainingId:number;
   
     datePickerConfig:Partial<BsDatepickerConfig>
     constructor(){
@@ -31,7 +32,7 @@ export class CloseTrainingComponent {
   
   
     callParent(){
-   
+      alert(this.EmployeeTrainingId);
       this.notify.emit(this.EmpID);
   }
 }

@@ -15,7 +15,7 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-    //this.domain="http://ajes-webapp2.ajes.ae:4225/";
+   // this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
   this.domain="https://localhost:7047/";
    }
@@ -96,6 +96,7 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
   }
 
  AddEmployee(empmodel:Employee){
+  alert("salman");
   return this._http.post<string>(this.domain + "api/Employee/AddEmployee",empmodel )
  } 
   AddTrainingMatrix(matrixmodel:Matrix){

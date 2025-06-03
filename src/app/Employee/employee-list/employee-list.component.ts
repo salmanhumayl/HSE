@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Employee } from 'src/app/models/Employee';
@@ -21,14 +22,16 @@ familyCode:string;
 EmpView:SearchEmp=new SearchEmp();
 EmployeeModel:Employee =new Employee();
 EmpCode:string;
-isSearchDiabled:boolean;
+IsSearchButtonDisabled:boolean;
+IsEmpCodeTextDisabled:boolean;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
     ngOnInit(): void {
       this.GetJobCategory();
       this.GetProject();
       this.GetEmployeeList();
-      this.isSearchDiabled=true;
+      this.IsSearchButtonDisabled=true;
+      this.IsEmpCodeTextDisabled=true;
     }
   
     GetEmployeeList(){
@@ -108,16 +111,20 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
       
 
        getEmpType(){
-        this.isSearchDiabled=true;
+        alert(1);
+        this.IsSearchButtonDisabled=true;
+        this.IsEmpCodeTextDisabled=true;
         if (this.EmployeeModel.empType=="A"){
-            this.isSearchDiabled=false
+            this.IsSearchButtonDisabled=false;
+            this.IsEmpCodeTextDisabled=false;
         }
       }
 
-       SaveEmployee()
+       SaveEmployee(form:NgForm)
        {
+        alert("SaveEmployee")
         this.AJESservice.AddEmployee(this.EmployeeModel).subscribe((response)=>{
-//this.EmployeeModel =new Employee();
+          form.reset();
           this.GetEmployeeList(); 
 
         });
