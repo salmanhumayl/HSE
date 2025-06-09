@@ -72,11 +72,12 @@
                  <form  class="row" #itemForm="ngForm" novalidate (ngSubmit)="SaveEmployee(itemForm)">
                    <div class="col-12">
                     <label for="inputNanme4" class="form-label">Select Employee Type</label>
-                    <select class="form-select" (change)="getEmpType()"  name="emptype" id="emptype" [(ngModel)]="EmployeeModel.empType">
+                    <select class="form-select" (change)="getEmpType()"  name="emptype" id="emptype" [(ngModel)]="EmployeeModel.empType" required >
                        <option  value=X selected >Please Select</option>
                         <option value=A>AJES</option>   
                         <option value=S>Sub Contactor</option>    
                     </select>
+                    
                   </div>  
 
                   <div class="col-12">
@@ -90,12 +91,16 @@
                    </div>
                     <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
-                    <input type="text" class="form-control" id="EID"  name="EID" [(ngModel)]="EmployeeModel.eid" >
+                    <input type="text" class="form-control" id="EID"  name="EID" [(ngModel)]="EmployeeModel.eid" 
+                    [required]="EmployeeModel.empType=='S'"
+                    >
+
+
                   </div>
                   <div class="col-12"> 
                     <label for="inputEmail4" class="form-label">Emp Name</label>
                     <input type="text" class="form-control" id="EmpName" required  name="EmpName" #name="ngModel"  [(ngModel)]="EmployeeModel.empName" >
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)"  class="alert alert-danger">
+                     <div *ngIf="name.invalid && (name.dirty || name.touched)"  class="alert alert-danger">
                       <diV *ngIf="name.errors?.['required']">
                         Employeee Name is required.
                       </diV>
@@ -105,23 +110,38 @@
 
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="familyCode" name="familyCode"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" >
+                   <select class="form-select" id="familyCode" name="familyCode"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" required #family="ngModel">
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
 
-                  </select>    
+                  </select> 
+                  
+                       <div *ngIf="family.invalid && family.touched"  class="alert alert-danger">
+                      <diV *ngIf="family.errors?.['required']">
+                       Job Category is required.
+                      </diV>
+
+                    </div>
+                
                   </div>
                   
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Position</label>
-                   <select class="form-select" id="postions" name="postions"  [(ngModel)]="EmployeeModel.jobCode">
+                   <select class="form-select" id="postions" name="postions"  [(ngModel)]="EmployeeModel.jobCode" required #position="ngModel">
                       <option *ngFor="let s of Postions" [value]="s.code">{{s.name}}</option>
 
                   </select>    
+
+                    <div *ngIf="position.invalid && position.touched"  class="alert alert-danger">
+                      <diV *ngIf="position.errors?.['required']">
+                       Position is required.
+                      </diV>
+
+                    </div>
                   </div>
                   <div class="col-12">
                     <label for="inputPassword4" class="form-label">Project</label>
                     
-                  <select class="form-select" id="project" name="project" [(ngModel)]="EmployeeModel.projectCode" >
+                  <select class="form-select" id="project" name="project" [(ngModel)]="EmployeeModel.projectCode"  disabled>
                       <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
 
                   </select>    

@@ -1,6 +1,7 @@
 import { Component, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { MyModalComponent } from './my-modal/my-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { MyModalComponent } from './my-modal/my-modal.component';
 export class AppComponent {
   bsModalRef?: BsModalRef;
 
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService,private toastrService:ToastrService) {}
 
   openModal() {
     this.bsModalRef = this.modalService.show(MyModalComponent);
@@ -28,6 +29,7 @@ export class AppComponent {
  }
 
  closeModal() {
+  this.toastrService.success("dasdasdds");
   this.bsModalRef?.hide() ;
 }
 }

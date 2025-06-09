@@ -31,6 +31,9 @@ import { ConsolidateRegisterComponent } from './ProjectRegister/consolidate-regi
 import { RemainingTraningsComponent } from './Employee/History/remaining-tranings/remaining-tranings.component';
 import { TrainingComponent } from './Setup/training/training.component';
 import { MatrixComponent } from './Setup/matrix/matrix.component';
+import { LoginComponent } from './login/login/login.component';
+import { ToastrModule } from 'ngx-toastr';
+import { LogoutComponent } from './logout/logout/logout.component';
 
 
 @NgModule({
@@ -52,7 +55,9 @@ import { MatrixComponent } from './Setup/matrix/matrix.component';
     ConsolidateRegisterComponent,
     RemainingTraningsComponent,
     TrainingComponent,
-    MatrixComponent
+    MatrixComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     FormsModule,
@@ -63,7 +68,15 @@ import { MatrixComponent } from './Setup/matrix/matrix.component';
     HttpClientModule,
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 4000, 
+       positionClass:'toast-top-right',
+       preventDuplicates:true,
+       closeButton: true,
+       progressBar: true,
+
+    }),
   ],
   providers: [{provide: LocationStrategy,useClass:HashLocationStrategy},],
   bootstrap: [AppComponent]

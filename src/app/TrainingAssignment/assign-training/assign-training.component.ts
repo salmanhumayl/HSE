@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { EmployeeTraining } from 'src/app/models/EmployeeTraining';
 import { AJESService } from 'src/app/service/app.service';
@@ -20,11 +21,17 @@ Data:any[] ;
   empTrainings:EmployeeTraining[]=[];
 
 
-constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
+constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService,private toastrService:ToastrService){}
  
 
 
  filtertraining(){
+
+  if (this.empTrainings.length > 0 )
+  {
+       this.toastrService.info("Please save the assinged training befor proceeding");
+       return;
+  }
  this.ngxService.start();
      this.AJESservice.GetEmployeeTrainingByType(this.jobCode,this.EmpID,this.Ttype).subscribe((response)=>  {
       this.Data=response;
@@ -56,8 +63,8 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
     this.empTrainings.push({
       EmpID:this.EmpID,
       MatrixID:matrixId,
-      ProjectCode:"8069",
-      ProjectName:"gop"
+      ProjectCode:localStorage.getItem('ProjectCode')||'',
+      ProjectName:localStorage.getItem('ProjectName')||''
 
     });
     
@@ -65,9 +72,10 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
   }
 
   AssignedTraining(){
-       alert(JSON.stringify(this.empTrainings));
+      // alert(JSON.stringify(this.empTrainings));
         this.AJESservice.AssignedTraining(this.empTrainings).subscribe((response)=>{
-
+        this.empTrainings=[];
+         this.toastrService.success("Training Assigned Successfully...");
         });
    
   }

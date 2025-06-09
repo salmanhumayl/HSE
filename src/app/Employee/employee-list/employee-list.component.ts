@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Employee } from 'src/app/models/Employee';
 import { SearchEmp } from 'src/app/models/searchEmp';
@@ -25,19 +26,21 @@ EmpCode:string;
 IsSearchButtonDisabled:boolean;
 IsEmpCodeTextDisabled:boolean;
   
-constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
+constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService,private toastrService:ToastrService){}
     ngOnInit(): void {
+      this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
       this.GetJobCategory();
       this.GetProject();
       this.GetEmployeeList();
       this.IsSearchButtonDisabled=true;
       this.IsEmpCodeTextDisabled=true;
+      
     }
   
     GetEmployeeList(){
       
       this.ngxService.start();
-      this.AJESservice.GetEmployeeList("8069").subscribe((data)=>  {
+      this.AJESservice.GetEmployeeList(this.EmployeeModel.projectCode).subscribe((data)=>  {
       this.Employees=data;
       this.ngxService.stop();
      });
@@ -73,6 +76,14 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
     this.ngxService.start();
     this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe((data)=>  {
     this.EmpView=data;
+
+    if (this.EmpView.projectCode!=localStorage.getItem('ProjectCode'))
+    {
+      this.ngxService.stop();
+      this.toastrService.info("The selected employee is not part of your assigned project");
+      
+      return ;
+    }
     this.EmployeeModel.empCode=this.EmpView.empCode
     this.EmployeeModel.empName=this.EmpView.empName;
     this.EmployeeModel.projectCode=this.EmpView.projectCode;
@@ -84,6 +95,7 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
    
     this.EmployeeModel.jobTitle=this.EmpView.jobtitle;
     this.GetPostions()
+ 
    
    this.ngxService.stop();
   });
@@ -111,7 +123,7 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
       
 
        getEmpType(){
-        alert(1);
+      
         this.IsSearchButtonDisabled=true;
         this.IsEmpCodeTextDisabled=true;
         if (this.EmployeeModel.empType=="A"){
@@ -122,11 +134,12 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
        SaveEmployee(form:NgForm)
        {
-        alert("SaveEmployee")
+
         this.AJESservice.AddEmployee(this.EmployeeModel).subscribe((response)=>{
           form.reset();
+          this.toastrService.success("Employee Added Successfully");
           this.GetEmployeeList(); 
-
+      
         });
       
        }

@@ -6,6 +6,7 @@ import { SearchEmp } from '../models/searchEmp';
 import { Employee } from '../models/Employee';
 import { Matrix } from '../models/Matrix';
 import { EmployeeTraining } from '../models/EmployeeTraining';
+import { loginmodel } from '../models/loginmodel';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,22 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-   // this.domain="http://ajes-webapp2.ajes.ae:4225/";
+  this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
-  this.domain="https://localhost:7047/";
+  //this.domain="https://localhost:7047/";
    }
+
+Login (model :loginmodel) :Observable<any> {
+ // alert(JSON.stringify(model));
+  return this._http.post<any>(this.domain + "api/Authenticate/login",model)
+
+}
+
+
 
   GetEmployeeHistory(employeeId:number):Observable<any>{
 
+    
     return this._http.get<any>(this.domain + "api/Employee/GetEmployeeHistory/" + employeeId  ); //Route Parameter 
     
   }
@@ -96,7 +106,7 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
   }
 
  AddEmployee(empmodel:Employee){
-  alert("salman");
+  
   return this._http.post<string>(this.domain + "api/Employee/AddEmployee",empmodel )
  } 
   AddTrainingMatrix(matrixmodel:Matrix){

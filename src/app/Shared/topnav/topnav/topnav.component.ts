@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { MessengerService } from 'src/app/service/messenger.service';
 
 declare const $:any;
 @Component({
@@ -8,7 +9,7 @@ declare const $:any;
 })
 export class TopnavComponent implements AfterViewInit {
 
-  constructor(){}
+  constructor(public msg:MessengerService){}
 
   ngAfterViewInit(){
    
