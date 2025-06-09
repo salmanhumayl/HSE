@@ -13,6 +13,7 @@ import { AJESService } from 'src/app/service/app.service';
 export class CloseTrainingComponent {
   TrainingName:string;
   EmployeeTrainingId:number;
+  showclosing:boolean;
    brDate:string;
 
     datePickerConfig:Partial<BsDatepickerConfig>
@@ -46,7 +47,7 @@ export class CloseTrainingComponent {
       this.notify.emit(this.EmpID);
       
       this.toastrService.success("Training Status Update Successfully")
-      this.router.navigate(['/opentaining/46']);
+     this.showclosing=false;
 
   });
 }

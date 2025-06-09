@@ -26,12 +26,12 @@ export class OpensTrainingComponent implements OnInit {
       });
     }
 
-    loadChild(mTrainingName:string,memployeeTrainingId:number){
+    loadChild(mTrainingName:string,memployeeTrainingId:number,hide:boolean){
       this.showChild=true;
       setTimeout(() =>{
          this.CloseComponent.TrainingName=mTrainingName;
          this.CloseComponent.EmployeeTrainingId=memployeeTrainingId;
-
+        this.CloseComponent.showclosing=hide;
      
     });
       
