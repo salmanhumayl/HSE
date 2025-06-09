@@ -97,8 +97,6 @@ Login (model :loginmodel) :Observable<any> {
     
   }
 
-
-
 GetAJESEmployee(empcode:string):Observable<SearchEmp>{
 
     return this._http.get<SearchEmp>(this.domain + "api/Employee/GetAJESEmployee/" + empcode );  
@@ -116,6 +114,14 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
    
   return this._http.post<string>(this.domain + "api/Employee/AddEmployeeTraining",trainingmodel )
  } 
+
+
+ UpdateTrainingStatus(trainingid:number,rDate:string):Observable<any>{
+
+  return this._http.get<any>(this.domain + "api/Employee/UpdateTrainingStatus/" + trainingid + "/" + rDate);
+  
+}
+
   
  
 

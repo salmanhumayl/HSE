@@ -35,7 +35,11 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
  this.ngxService.start();
      this.AJESservice.GetEmployeeTrainingByType(this.jobCode,this.EmpID,this.Ttype).subscribe((response)=>  {
       this.Data=response;
-      console.log(this.Data);
+      if (this.Data.length==0)
+      {
+        this.toastrService.info("Training Matrix configuration is missing for the selected position");
+      }
+      
       this.ngxService.stop();
      });
 

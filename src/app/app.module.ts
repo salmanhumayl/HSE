@@ -71,7 +71,7 @@ import { LogoutComponent } from './logout/logout/logout.component';
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 4000, 
-       positionClass:'toast-top-right',
+       positionClass:'toast-top-full-width',
        preventDuplicates:true,
        closeButton: true,
        progressBar: true,

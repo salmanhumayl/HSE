@@ -28,20 +28,21 @@ IsEmpCodeTextDisabled:boolean;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService,private toastrService:ToastrService){}
     ngOnInit(): void {
-      this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
+       this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
       this.GetJobCategory();
       this.GetProject();
       this.GetEmployeeList();
       this.IsSearchButtonDisabled=true;
       this.IsEmpCodeTextDisabled=true;
-      
+     
     }
   
     GetEmployeeList(){
       
       this.ngxService.start();
-      this.AJESservice.GetEmployeeList(this.EmployeeModel.projectCode).subscribe((data)=>  {
+      this.AJESservice.GetEmployeeList(localStorage.getItem('ProjectCode')||'').subscribe((data)=>  {
       this.Employees=data;
+       this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
       this.ngxService.stop();
      });
    }
@@ -86,8 +87,8 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
     }
     this.EmployeeModel.empCode=this.EmpView.empCode
     this.EmployeeModel.empName=this.EmpView.empName;
-    this.EmployeeModel.projectCode=this.EmpView.projectCode;
-    this.EmployeeModel.projectName=this.EmpView.projectName
+    this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
+    this.EmployeeModel.projectName=localStorage.getItem('ProjectName')||''
     
     this.EmployeeModel.familyCode=this.EmpView.familyCode;
     this.EmployeeModel.familyName=this.EmpView.familyName;
@@ -139,7 +140,8 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
           form.reset();
           this.toastrService.success("Employee Added Successfully");
           this.GetEmployeeList(); 
-      
+         
+         
         });
       
        }

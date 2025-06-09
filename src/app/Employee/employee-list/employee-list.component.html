@@ -22,6 +22,7 @@
                     <th>Emp No</th>
                     <th>Emirates ID</th>
                     <th>Name</th>
+                    <th>Job Category</th>
                     <th>Designation</th>
                     <th>Project</th>
                     <th>Type</th>
@@ -34,13 +35,19 @@
                           <td>{{e.empCode}}</td>
                           <td>{{e.eid}}</td> 
                           <td>{{e.empName}}</td>
+                          <td>{{e.familyName}}</td>
                           <td>{{e.jobTitle}}</td>
                           <td>{{e.projectName}}</td>
-                          <td>&nbsp;</td>
+                           <ng-template [ngIf]="e.empType=='A'" >
+                               <td><span class="badge rounded-pill bg-primary" style="pointer-events: none">AJES</span></td>
+                           </ng-template>   
+
+                            <ng-template [ngIf]="e.empType=='S'" >
+                               <td><span class="badge rounded-pill bg-secondary" style="pointer-events: none">Sub Contractor</span></td>
+                           </ng-template>   
                            <td>
                             <a [routerLink]="['/EditFile/']"  class="btn btn-success">Edit</a>
                           </td> 
-                        
                       </tr>
                 </tbody>
               </table>
@@ -142,7 +149,8 @@
                     <label for="inputPassword4" class="form-label">Project</label>
                     
                   <select class="form-select" id="project" name="project" [(ngModel)]="EmployeeModel.projectCode"  disabled>
-                      <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
+                    <option  value=X selected >dsadadadt</option>
+                    <option *ngFor="let s of Projects" [value]="s.code">{{s.name}}</option>
 
                   </select>    
                   </div>

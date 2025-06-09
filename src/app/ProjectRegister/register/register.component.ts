@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
  bsModalRef?: BsModalRef;
   Projects:any[];
   Employees:any[];
-  projectcode:string="8069";
+
   EmpID:number;
   jobCode:string;
   constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService){}
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
    GetEmployeeList(){
      this.ngxService.start();
-     this.AJESservice.GetEmployeeList(this.projectcode).subscribe((data)=>  {
+     this.AJESservice.GetEmployeeList(localStorage.getItem('ProjectCode')||'').subscribe((data)=>  {
       this.Employees=data;
       console.log(this.Employees);
       this.ngxService.stop();

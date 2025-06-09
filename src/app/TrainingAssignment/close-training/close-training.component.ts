@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AJESService } from 'src/app/service/app.service';
 
 @Component({
   selector: 'app-close-training',
@@ -9,9 +13,10 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 export class CloseTrainingComponent {
   TrainingName:string;
   EmployeeTrainingId:number;
-  
+   brDate:string;
+
     datePickerConfig:Partial<BsDatepickerConfig>
-    constructor(){
+    constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private toastrService:ToastrService,private router:Router){
 
       this.datePickerConfig=Object.assign({},
       {
@@ -32,9 +37,19 @@ export class CloseTrainingComponent {
   
   
     callParent(){
-      alert(this.EmployeeTrainingId);
+     const filterOn=new Date(this.brDate).toISOString().split('T')[0];
+   
+    this.ngxService.start();
+    this.AJESservice.UpdateTrainingStatus(this.EmployeeTrainingId,filterOn).subscribe((data)=>  {
+      this.ngxService.stop();
+      
       this.notify.emit(this.EmpID);
-  }
+      
+      this.toastrService.success("Training Status Update Successfully")
+      this.router.navigate(['/opentaining/46']);
+
+  });
 }
 
+}
 

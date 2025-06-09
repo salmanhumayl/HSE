@@ -20,6 +20,7 @@
                             <input type="text" class="form-control"
                              id="receivedDate" 
                              name="receivedDate"
+                            [(ngModel)]="brDate" 
                              bsDatepicker
                             [bsConfig]="datePickerConfig"/> 
                      </div>
@@ -27,7 +28,7 @@
                         <label for="inputNanme4" class="form-label">No of Hours Completed</label>
                       </div>
                      <div class="col-12">
-                        <input type="text" class="form-control" id="EmpCode"  name="EmpCode"  >
+                        <input type="text" class="form-control" id="hours"  name="hours"  >
                      </div>
 
                      <div class="modal-footer">
