@@ -1,4 +1,4 @@
-
+    <app-topnav></app-topnav>
 <main id="main" class="main">
   
     <div class="pagetitle">
@@ -93,7 +93,7 @@
                     <input type="text" class="form-control" id="EmpCode"  name="EmpCode" [disabled]="IsEmpCodeTextDisabled" [(ngModel)]="EmpCode"  >
                    </div>
                    <div class="col-6">
-                    <button class="btn btn-success" (click)="GetAJESEmployee()" [disabled]="IsSearchButtonDisabled" >Get Employee</button>
+                    <button type="button" class="btn btn-success" (click)="GetAJESEmployee()" [disabled]="IsSearchButtonDisabled" >Get Employee</button>
                    </div>
                     <div class="col-12">
                     <label for="inputNanme4" class="form-label">Emirates ID</label>
@@ -116,7 +116,7 @@
 
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="familyCode" name="familyCode"  [(ngModel)]="EmpView.familyCode" (change)="GetPostions()" required #family="ngModel">
+                   <select class="form-select" id="familyCode" name="familyCode"  [(ngModel)]="EmployeeModel.familyCode" (change)="GetPostions()" required #family="ngModel">
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
 
                   </select> 

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -25,10 +26,13 @@ EmployeeModel:Employee =new Employee();
 EmpCode:string;
 IsSearchButtonDisabled:boolean;
 IsEmpCodeTextDisabled:boolean;
+  form: any;
   
 constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private modalService: BsModalService,private toastrService:ToastrService){}
     ngOnInit(): void {
-       this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
+      this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
+      this.EmployeeModel.projectName=localStorage.getItem('ProjectName')||''
+    
       this.GetJobCategory();
       this.GetProject();
       this.GetEmployeeList();
@@ -66,14 +70,19 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
      GetPostions(){
       this.ngxService.start();
-      this.AJESservice.GetPositions(this.EmpView.familyCode).subscribe((data)=>  {
+      this.AJESservice.GetPositions(this.EmployeeModel.familyCode).subscribe((data)=>  {
       this.Postions=data;
       this.ngxService.stop();
      });
    }
 
    GetAJESEmployee(){
-   
+     if (this.EmployeeModel.empType=="A"){
+    if (this.EmpCode==null){
+      this.toastrService.info("Enter Employee Code");
+      return;
+    }
+  }
     this.ngxService.start();
     this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe((data)=>  {
     this.EmpView=data;
@@ -131,16 +140,42 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
             this.IsSearchButtonDisabled=false;
             this.IsEmpCodeTextDisabled=false;
         }
+        else{
+             this.EmployeeModel.empCode="";
+        }
       }
 
        SaveEmployee(form:NgForm)
        {
+        this.ngxService.start();
+        
+        if (this.EmployeeModel.empType=="S")
+        {
 
-        this.AJESservice.AddEmployee(this.EmployeeModel).subscribe((response)=>{
+            var JobCategory=document.getElementById('familyCode') as HTMLSelectElement;
+            this.EmployeeModel.familyName=JobCategory.options[JobCategory.selectedIndex].text;
+            
+            var postions=document.getElementById('postions') as HTMLSelectElement;
+            this.EmployeeModel.jobTitle=postions.options[postions.selectedIndex].text;
+            
+        
+
+        }
+        
+        this.AJESservice.AddEmployee(this.EmployeeModel).subscribe({
+          next:res=>{
           form.reset();
-          this.toastrService.success("Employee Added Successfully");
-          this.GetEmployeeList(); 
-         
+       
+           this.toastrService.success("Employee Added Successfully");
+           this.GetEmployeeList(); 
+           this.ngxService.stop();
+          },
+          error:(error:HttpErrorResponse)=>{
+            this.toastrService.error(error.error);
+          this.ngxService.stop();
+            
+          
+          }
          
         });
       

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { TrainingMatrix } from '../models/TrainingMatrix ';
 import { SearchEmp } from '../models/searchEmp';
 import { Employee } from '../models/Employee';
@@ -16,9 +16,9 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-  this.domain="http://ajes-webapp2.ajes.ae:4225/";
+  //this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
-  //this.domain="https://localhost:7047/";
+  this.domain="https://localhost:7047/";
    }
 
 Login (model :loginmodel) :Observable<any> {
@@ -103,9 +103,9 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
     
   }
 
- AddEmployee(empmodel:Employee){
+ AddEmployee(empmodel:Employee):Observable<HttpResponse<any>>{
   
-  return this._http.post<string>(this.domain + "api/Employee/AddEmployee",empmodel )
+  return this._http.post<any>(this.domain + "api/Employee/AddEmployee",empmodel )
  } 
   AddTrainingMatrix(matrixmodel:Matrix){
   return this._http.post<string>(this.domain + "api/Training/AddTrainingMatrix",matrixmodel )
@@ -116,9 +116,9 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
  } 
 
 
- UpdateTrainingStatus(trainingid:number,rDate:string):Observable<any>{
+ UpdateTrainingStatus(trainingid:number,rDate:string,hours:number):Observable<any>{
 
-  return this._http.get<any>(this.domain + "api/Employee/UpdateTrainingStatus/" + trainingid + "/" + rDate);
+  return this._http.get<any>(this.domain + "api/Employee/UpdateTrainingStatus/" + trainingid + "/" + rDate + "/" +hours);
   
 }
 

@@ -35,7 +35,7 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
  this.ngxService.start();
      this.AJESservice.GetEmployeeTrainingByType(this.jobCode,this.EmpID,this.Ttype).subscribe((response)=>  {
       this.Data=response;
-      if (this.Data.length==0)
+      if (this.Data.length==0 && this.Ttype!="X")
       {
         this.toastrService.info("Training Matrix configuration is missing for the selected position");
       }
@@ -77,11 +77,14 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
 
   AssignedTraining(){
       // alert(JSON.stringify(this.empTrainings));
-        this.AJESservice.AssignedTraining(this.empTrainings).subscribe((response)=>{
+      if (this.empTrainings.length >0){
+
+      
+      this.AJESservice.AssignedTraining(this.empTrainings).subscribe((response)=>{
         this.empTrainings=[];
          this.toastrService.success("Training Assigned Successfully...");
         });
-   
+      }
   }
 
 }

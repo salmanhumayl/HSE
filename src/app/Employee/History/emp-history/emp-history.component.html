@@ -18,6 +18,8 @@
                   <th>Project Code</th>
                   <th>Project </th>
                   <th>Training</th>
+                  <th>Type</th>
+                  <th>Required</th>
                   <th>Completed On</th>
                   <th>Hours</th>
                   <th>Status</th>
@@ -30,6 +32,17 @@
                   <td>{{e.projectCode}}</td>
                   <td>{{e.projectName}}</td>
                   <td>{{e.training}}</td>
+
+                    <ng-template [ngIf]="e.trainingType=='I'">
+                             <td ><span class="badge rounded-pill bg-primary" style="pointer-events: none">Internal </span></td>
+                        </ng-template>
+                             <ng-template [ngIf]="e.trainingType=='E'">
+                             <td ><span class="badge rounded-pill bg-info" style="pointer-events: none">External </span></td>
+                        </ng-template>
+                    
+                   <td>{{e.mandatory}}</td>
+
+
                   <ng-template [ngIf]="e.completedOn!=null">
                       <td>{{e.completedOn | date:'dd'}}/{{e.completedOn | date:'MM'}}/{{e.completedOn | date:'yyyy'}}</td>
                   </ng-template>    
@@ -37,17 +50,18 @@
                    <ng-template [ngIf]="e.completedOn==null">
                       <td>&nbsp;</td>
                    </ng-template>
+                   <td>{{e.hoursCompleted}}</td>
+
                <ng-template [ngIf]="e.status=='C'">
-                     <td>{{e.hourHoursCompleted}}</td>
-                      <td ><span class="badge rounded-pill bg-success" style="pointer-events: none">Completed</span></td>
+                     <td ><span class="badge rounded-pill bg-success" style="pointer-events: none">Completed</span></td>
                      
                   </ng-template>    
-                  <ng-template [ngIf]="e.status=='A'" >
-                      <td>&nbsp;</td>
-                      <td><span class="badge rounded-pill bg-primary" style="pointer-events: none">Progress</span></td>
-                     
-                  </ng-template>   
-                  
+              <ng-template [ngIf]="e.status=='A'" >
+                      <td><span class="badge rounded-pill bg-primary" style="pointer-events: none">Assigned</span></td>
+              </ng-template>   
+                    <ng-template [ngIf]="e.status=='S'" >
+                      <td><span class="badge rounded-pill bg-primary" style="pointer-events: none">Scheduled</span></td>
+               </ng-template>   
 
                 
                 </tr>

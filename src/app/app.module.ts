@@ -34,6 +34,7 @@ import { MatrixComponent } from './Setup/matrix/matrix.component';
 import { LoginComponent } from './login/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LogoutComponent } from './logout/logout/logout.component';
+import { TrainingSchedulingComponent } from './Scheduling/training-scheduling/training-scheduling.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { LogoutComponent } from './logout/logout/logout.component';
     TrainingComponent,
     MatrixComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    TrainingSchedulingComponent
   ],
   imports: [
     FormsModule,
@@ -70,7 +72,7 @@ import { LogoutComponent } from './logout/logout/logout.component';
     NgxUiLoaderRouterModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 4000, 
+      timeOut: 6000, 
        positionClass:'toast-top-full-width',
        preventDuplicates:true,
        closeButton: true,

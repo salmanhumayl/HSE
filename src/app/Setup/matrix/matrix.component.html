@@ -20,7 +20,7 @@
 <main id="main" class="main">
   
     <div class="pagetitle">
-      <h1>Matrix <a (click)="openModel(Addnewmatrix)"  class="btn btn-primary btn-sm right-btn">Add New</a></h1>
+      <h1>Training Matrix <a (click)="openModel(Addnewmatrix)"  class="btn btn-primary btn-sm right-btn">Add New</a></h1>
       </div>
 <section class="section">
     
@@ -88,26 +88,48 @@
                 
   
                 <!-- Vertical Form -->
-                 <form class="row">
+                  <form  class="row" #itemForm="ngForm" novalidate (ngSubmit)="SaveMatrix(itemForm)">
                    <div class="col-12">
                     <label for="inputAddress" class="form-label">Job Category</label>
-                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="matrixModel.FamilyCode" (change)="GetPostions()" >
+                   <select class="form-select" id="JobCategory" name="JobCategory"  [(ngModel)]="matrixModel.FamilyCode" (change)="GetPostions()" required #family="ngModel">
                       <option *ngFor="let s of Category" [value]="s.familyCode">{{s.jobFamily}}</option>
-                   </select>    
+                   </select>  
+                   
+                   <div *ngIf="family.invalid && family.touched"  class="alert alert-danger">
+                      <diV *ngIf="family.errors?.['required']">
+                       Job Category is required.
+                      </diV>
+
+                    </div>
+                
                    </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label">Position</label>
-                   <select class="form-select" id="postions" name="postions" [(ngModel)]="matrixModel.JobCode" >
+                   <select class="form-select" id="postions" name="postions" [(ngModel)]="matrixModel.JobCode" required #position="ngModel" >
                       <option *ngFor="let s of Postions" [value]="s.code">{{s.name}}</option>
-                  </select>    
+                  </select>
+                  
+                    <div *ngIf="position.invalid && position.touched"  class="alert alert-danger">
+                      <diV *ngIf="position.errors?.['required']">
+                       Position is required.
+                      </diV>
+
+                    </div>    
                   </div>
                   <div class="col-12">
                     <label for="inputNanme4" class="form-label">Training Type</label>
-                    <select class="form-select" id="trianinType" name="trianinType" [(ngModel)]="matrixModel.trainingType" >
+                    <select class="form-select" id="trianinType" name="trianinType" [(ngModel)]="matrixModel.trainingType" required #trainingType="ngModel"  >
                        <option value=X selected >Please Select</option>
                         <option value=I>Internal</option>   
                         <option value=E>External</option>    
                     </select>
+
+                       <div *ngIf="trainingType.invalid && trainingType.touched"  class="alert alert-danger">
+                      <diV *ngIf="trainingType.errors?.['required']">
+                       TrainingType is required.
+                      </diV>
+
+                    </div>   
                   </div> 
                   
                   
@@ -130,7 +152,7 @@
                   </div> -->
                 
                    <div class="modal-footer">
-                   <button type="button" class="btn btn-primary" (click)="Save()">Submit</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Submit</button>
                      <button type="button" class="btn btn-danger"  (click)="closeModal()" >Close</button>
                   </div>
   

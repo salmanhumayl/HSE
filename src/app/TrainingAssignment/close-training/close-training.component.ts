@@ -15,6 +15,7 @@ export class CloseTrainingComponent {
   EmployeeTrainingId:number;
   showclosing:boolean;
    brDate:string;
+   nhours:number;
 
     datePickerConfig:Partial<BsDatepickerConfig>
     constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderService,private toastrService:ToastrService,private router:Router){
@@ -41,7 +42,7 @@ export class CloseTrainingComponent {
      const filterOn=new Date(this.brDate).toISOString().split('T')[0];
    
     this.ngxService.start();
-    this.AJESservice.UpdateTrainingStatus(this.EmployeeTrainingId,filterOn).subscribe((data)=>  {
+    this.AJESservice.UpdateTrainingStatus(this.EmployeeTrainingId,filterOn,this.nhours).subscribe((data)=>  {
       this.ngxService.stop();
       
       this.notify.emit(this.EmpID);

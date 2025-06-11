@@ -46,11 +46,11 @@
                           <!-- <td>{{e.projectName}}</td> -->
                           <!-- <td>&nbsp;</td> -->
                            <td>
-                            <button type="button" class="btn btn-success btn-sm" (click)="openModelAssignedTraining(e.id,e.jobCode,Assigntask)">Assign Training</button>
-                            <button type="button" class="btn btn-primary btn-sm  ms-3" [routerLink]="['/opentrainings',e.id]">Editing</button>
-                            <button type="button" class="btn btn-warning btn-sm  ms-3" (click)="openModelTransfer(e.id,Transfer)">Transfer</button>
                             <button type="button" class="btn btn-danger btn-sm ms-3" (click)="openModelHistory(e.id,e.jobCode,emphistory)">History</button>
-                          
+                            <button type="button" class="btn btn-warning btn-sm  ms-3" (click)="openModelTransfer(e.id,Transfer)">Transfer</button>
+                            <button type="button" class="btn btn-success btn-sm ms-3" (click)="openModelAssignedTraining(e.id,e.jobCode,Assigntask)">Assign Training</button>
+                            <!-- <button type="button" class="btn btn-primary btn-sm  ms-3" [routerLink]="['/opentrainings',e.id]">Editing</button> -->
+                           
                           </td> 
                         
                       </tr>
