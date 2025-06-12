@@ -118,4 +118,11 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
        
         }
 
+UpdateMandatory(id:number,isMandatory:boolean){
+   
+    this.AJESservice.UpdateMandatory(id,isMandatory).subscribe((response)=>{
+    this.getTrainingMatrix();
+});
+}
+
 }

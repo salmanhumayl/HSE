@@ -1,1 +1,143 @@
-<p>training-scheduling works!</p>
+
+  <app-topnav></app-topnav>
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Training Detail</h1>
+      
+    </div><!-- End Page Title -->
+<section class="section">
+    
+    <div class="row">
+          <div class="card">
+            <div class="card-body">
+          <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Training Type</label>
+                    <select class="form-select" name="trainingtype" [(ngModel)]="Ttype" (change)="Gettrainings()">
+                       <option value=X selected >Please Select</option>
+                        <option value=I>Internal</option>   
+                        <option value=E>External</option>    
+                    </select>     
+          </div>
+
+            <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Training</label>
+                     <select class="form-select" id="training" name="training"  [(ngModel)]="training"  required #family="ngModel">
+                     <option value=X selected >Please Select</option>
+                      <option *ngFor="let s of Data" [value]="s.id">{{s.name}}</option>
+
+                  </select> 
+          </div>
+
+          <div class="col-lg-6">
+            <button type="button" class="btn btn-danger btn mt-2" (click)="SearchEmployee()" >Search Participants
+                </button>
+      
+          </div>
+        </div>
+          </div>
+    </div>
+
+    <div class="row">
+  
+     <div class="col-lg-12">
+
+      
+        <div class="card">
+          <div class="card-body">
+          
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover table-bordered ">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th><input type="checkbox" class="form-check-input"  (change)="checkAllCheckBox($event)"></th>
+                  <th>Emp No</th>
+                  <th>Emirates ID</th>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Project</th>
+                  <th>Employee Type</th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr *ngFor="let e of Detail;let i=index" >
+                  <td>{{i+1}}</td>
+                  <td><input type="checkbox" [(ngModel)]="Detail[i].accNoStatus" class="form-check-input"></td>
+                  <td>{{e.empCode}}</td>
+                  <td>{{e.eid}}</td>
+                  <td>{{e.empName}}</td>
+                  <td>{{e.jobTitle}}</td>
+                  <td>{{e.projectName}}</td>
+                  <td>{{e.empType}}</td>
+               
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+<ng-template [ngIf]="showclosing">
+  <div class="row">
+          <div class="card">
+            <div class="card-body">
+          <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Scheduled On</label>
+                  <input type="text" class="form-control"
+                             id="receivedDate" 
+                             name="receivedDate"
+                            [(ngModel)]="brDate" 
+                             bsDatepicker
+                            [bsConfig]="datePickerConfig"/> 
+            </div>
+
+            <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Conducted By</label>
+                 <input type="text" class="form-control" id="conductedby" name="conductedby" required   [(ngModel)]="conductedby" >        
+          </div>
+          
+          
+            <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Location/Venenu</label>
+                  <input type="text" class="form-control" id="location" name="location" required [(ngModel)]="Location"  >         
+          </div>
+
+             <div class="col-lg-6">
+                <label for="inputNanme4" class="form-label" style="font-weight: bold;font-size: medium;">Completed On</label>
+                  <input type="text" class="form-control"
+                             id="receivedDate" 
+                             name="receivedDate"
+                            [(ngModel)]="brDate" 
+                             bsDatepicker
+                            [bsConfig]="datePickerConfig"/> 
+            </div>
+
+           
+
+          <div class="col-lg-6">
+            <button type="button" class="btn btn-success btn mt-2" (click)="CreateTrainingSchedule()" >Save  
+                </button>
+      
+          </div>
+
+        </div>
+          </div>
+    </div>
+ </ng-template>
+
+
+    </section>
+</main> 
+
+
+
+
+
+
+
+

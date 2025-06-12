@@ -15,11 +15,11 @@
               <thead>
                 <tr>
                   <th>S.No</th>  
-                  <th>Project Code</th>
                   <th>Project </th>
                   <th>Training</th>
                   <th>Type</th>
                   <th>Required</th>
+                  <th>Scheduled On</th>
                   <th>Completed On</th>
                   <th>Hours</th>
                   <th>Status</th>
@@ -29,7 +29,6 @@
               <tbody >
                 <tr *ngFor="let e of Data;let i=index" >
                   <td>{{i+1}}</td>
-                  <td>{{e.projectCode}}</td>
                   <td>{{e.projectName}}</td>
                   <td>{{e.training}}</td>
 
@@ -41,8 +40,16 @@
                         </ng-template>
                     
                    <td>{{e.mandatory}}</td>
+                  
+                        <ng-template [ngIf]="e.scheduleOn!=null">
+                      <td>{{e.scheduleOn | date:'dd'}}/{{e.scheduleOn | date:'MM'}}/{{e.scheduleOn | date:'yyyy'}}</td>
+                  </ng-template>    
+                  
+                   <ng-template [ngIf]="e.scheduleOn==null">
+                      <td>&nbsp;</td>
+                   </ng-template>
 
-
+                
                   <ng-template [ngIf]="e.completedOn!=null">
                       <td>{{e.completedOn | date:'dd'}}/{{e.completedOn | date:'MM'}}/{{e.completedOn | date:'yyyy'}}</td>
                   </ng-template>    

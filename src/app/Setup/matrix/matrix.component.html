@@ -37,7 +37,7 @@
                   <tr>
                     <th>S.No</th>
                     <th>Job Category</th>
-                    <th>Job Title</th>
+                    <th>Position</th>
                     <th>Training</th>
                     <th>Mandatory</th>
                     <th>Type</th>
@@ -49,7 +49,7 @@
                         <td>{{item.familyName}}</td>
                         <td>{{item.jobTitle}}</td>
                         <td>{{item.training.name}}</td> 
-                        <td>{{ item.isMandatory ? 'Yes' : 'No' }}</td>
+                        <td>{{ item.isMandatory ? 'Yes' : 'No' }} || <button type="button" (click)="UpdateMandatory(item.matrixId,item.isMandatory)">Change</button> </td>
                          
                         <ng-template [ngIf]="item.training.type=='I'">
                              <td ><span class="badge rounded-pill bg-primary" style="pointer-events: none">Internal </span></td>
@@ -58,10 +58,7 @@
                              <td ><span class="badge rounded-pill bg-info" style="pointer-events: none">External </span></td>
                         </ng-template>    
                        
-                           <td>
-                            <a [routerLink]="['/EditFile/']"  class="btn btn-success">Edit</a>
-                          </td> 
-                        
+                          
                       </tr>
                 </tbody>
               </table>

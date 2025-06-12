@@ -7,6 +7,7 @@ import { Employee } from '../models/Employee';
 import { Matrix } from '../models/Matrix';
 import { EmployeeTraining } from '../models/EmployeeTraining';
 import { loginmodel } from '../models/loginmodel';
+import { Schedule, trainingSchedule } from '../models/trainingSchedule';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class AJESService {
   private domain :string | undefined;
 
   constructor(private _http:HttpClient) {
-  //this.domain="http://ajes-webapp2.ajes.ae:4225/";
+  this.domain="http://ajes-webapp2.ajes.ae:4225/";
       
-  this.domain="https://localhost:7047/";
+ // this.domain="https://localhost:7047/";
    }
 
 Login (model :loginmodel) :Observable<any> {
@@ -84,11 +85,19 @@ Login (model :loginmodel) :Observable<any> {
     
   }
 
-  //  GetTrainingsByType(type:string):Observable<any[]>{
+    GetTrainingsByType(type:string):Observable<any[]>{
 
-  //   return this._http.get<any[]>(this.domain + "api/Training/GetTrainingsByType/" + type );  
+     return this._http.get<any[]>(this.domain + "api/Training/GetTrainingsByType/" + type );  
     
-  // }
+  }
+  
+    EmployeeTrainingSchedule(trainingid:number):Observable<trainingSchedule[]>{
+
+     return this._http.get<trainingSchedule[]>(this.domain + "api/Employee/EmployeeTrainingSchedule/" + trainingid );  
+    
+  }
+
+  
 
   
     GetEmployeeTrainingByType(jobcode:string,empid:number,trainingtype:string):Observable<any[]>{
@@ -115,6 +124,10 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
   return this._http.post<string>(this.domain + "api/Employee/AddEmployeeTraining",trainingmodel )
  } 
 
+ UpdateMandatory(id:number,isMandatory:boolean){
+  return this._http.get(this.domain + "api/Training/UpdateMandatory/" + id +"/" + isMandatory )
+ } 
+
 
  UpdateTrainingStatus(trainingid:number,rDate:string,hours:number):Observable<any>{
 
@@ -122,6 +135,14 @@ GetAJESEmployee(empcode:string):Observable<SearchEmp>{
   
 }
 
+//trainingSchedule[]
+CreateTrainingSchedule(ScheduleList:Schedule):Observable<string>{
+ //alert(JSON.stringify(ScheduleList));
+  const headers = {
+    'Content-Type':'application/json'};
+
+  return this._http.post<string>(this.domain + "api/Training/CreateTrainingSchedule",ScheduleList,{headers});
+}
   
  
 

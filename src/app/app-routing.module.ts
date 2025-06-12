@@ -11,6 +11,7 @@ import { MatrixComponent } from './Setup/matrix/matrix.component';
 import { LoginComponent } from './login/login/login.component';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './logout/logout/logout.component';
+import { TrainingSchedulingComponent } from './Scheduling/training-scheduling/training-scheduling.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent,pathMatch:'full'},
@@ -21,6 +22,8 @@ const routes: Routes = [
   {path:'opentrainings/:empid',component:OpensTrainingComponent},
   {path:'lsttrainings',component:TrainingComponent},
   {path:'matrix',component:MatrixComponent},
+  {path:'scheduletraining',component:TrainingSchedulingComponent},
+  
   {path:'logout',component:LogoutComponent},
   {path:'**',redirectTo:'login',pathMatch:'full'}
   
