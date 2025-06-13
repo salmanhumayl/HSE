@@ -77,37 +77,41 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
    }
 
    GetAJESEmployee(){
-     if (this.EmployeeModel.empType=="A"){
-    if (this.EmpCode==null){
+    if (this.EmployeeModel.empType=="A"){
+     if (this.EmpCode==undefined){
       this.toastrService.info("Enter Employee Code");
       return;
     }
   }
     this.ngxService.start();
-    this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe((data)=>  {
-    this.EmpView=data;
-
-    if (this.EmpView.projectCode!=localStorage.getItem('ProjectCode'))
-    {
-      this.ngxService.stop();
-      this.toastrService.info("The selected employee is not part of your assigned project");
-      
-      return ;
-    }
-    this.EmployeeModel.empCode=this.EmpView.empCode
-    this.EmployeeModel.empName=this.EmpView.empName;
-    this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
-    this.EmployeeModel.projectName=localStorage.getItem('ProjectName')||''
-    
-    this.EmployeeModel.familyCode=this.EmpView.familyCode;
-    this.EmployeeModel.familyName=this.EmpView.familyName;
-    this.EmployeeModel.jobCode=this.EmpView.designationCode;
-   
-    this.EmployeeModel.jobTitle=this.EmpView.jobtitle;
-    this.GetPostions()
- 
-   
-   this.ngxService.stop();
+    this.AJESservice.GetAJESEmployee(this.EmpCode).subscribe({ 
+      next:data=>{
+           
+            this.EmpView=data;
+            if (this.EmpView.projectCode!=localStorage.getItem('ProjectCode'))
+              {
+                    this.ngxService.stop();
+                    this.toastrService.info("The selected employee is not part of your assigned project");
+                    
+                    return ;
+                  }
+                  this.EmployeeModel.empCode=this.EmpView.empCode
+                  this.EmployeeModel.empName=this.EmpView.empName;
+                  this.EmployeeModel.projectCode=localStorage.getItem('ProjectCode')||'';
+                  this.EmployeeModel.projectName=localStorage.getItem('ProjectName')||''
+                  
+                  this.EmployeeModel.familyCode=this.EmpView.familyCode;
+                  this.EmployeeModel.familyName=this.EmpView.familyName;
+                  this.EmployeeModel.jobCode=this.EmpView.designationCode;
+                
+                  this.EmployeeModel.jobTitle=this.EmpView.jobtitle;
+                  this.GetPostions()
+                this.ngxService.stop();
+      },
+          error:(error:HttpErrorResponse)=>{
+          this.toastrService.error(error.error);
+          this.ngxService.stop();
+          }
   });
 }
 
@@ -130,8 +134,6 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
          this.bsModalRef?.hide() ;
        }
 
-      
-
        getEmpType(){
       
         this.IsSearchButtonDisabled=true;
@@ -148,6 +150,11 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
        SaveEmployee(form:NgForm)
        {
         this.ngxService.start();
+        if (this.EmployeeModel.empType=="A")
+        {
+           var empcodeCONTROL =document.getElementById('EmpCode') as HTMLInputElement;
+           this.EmployeeModel.empCode=empcodeCONTROL.value; 
+        }
         
         if (this.EmployeeModel.empType=="S")
         {
@@ -171,8 +178,8 @@ constructor(private AJESservice:AJESService,private ngxService:NgxUiLoaderServic
            this.ngxService.stop();
           },
           error:(error:HttpErrorResponse)=>{
-            this.toastrService.error(error.error);
-          this.ngxService.stop();
+            this.toastrService.error(error.error + " " +  error.status.toString());
+           this.ngxService.stop();
             
           
           }
